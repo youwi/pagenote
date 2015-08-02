@@ -1,5 +1,5 @@
 
-<div id="WikiContent">${page}</div>
+
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -20,52 +20,70 @@
     <div class='btn-group btn-groupfix'  id='tagedit'>
         <span href="#" id='ckeditor' 	class="btn btn-primary  btn-xs">CKeditor</span>
         <a href="#" id='save' 	class="btn btn-primary  btn-xs">保存</a>
-        <a href="#" id='upload' class="btn btn-primary  btn-xs" >上传文件</a>
+        <a href="#" id='upload' class="btn btn-primary  btn-xs">上传文件</a>
         <a href="#" id='edit'   class="btn btn-primary  btn-xs">编辑</a>
+        <a href="#" id='newfile'   class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#myModal">新建</a>
         <a href="#" id='exit' 	class="btn btn-primary  btn-xs">退出</a>
         <!--<a href="#" id='tog'    class="btn btn-primary  btn-xs ">-->
             <!--&lt;!&ndash;<i class="fa-li fa fa-check-square"></i>a&ndash;&gt;-->
         <!--</a>-->
     </div>
 
-        <!--<div style=""  >-->
-            <!--<span id='tagop' class="glyphicon glyphicon-list"></span>-->
 
-        <!--</div>-->
-        <!--<div class='col-xs-10'  style="min-height: 500px">-->
+    <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">-->
+        <!--Launch demo modal-->
+    <!--</button>-->
 
-        </div>
-
-</nav>
-
-<div id="pad-float">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span2">
-                <div class='btn-group-vertical col-xs-2'>
-                    <a href="#" class="btn btn-primary  btn-xs" id="task">任务:</a>
-                    <a href="#" class="btn btn-primary  btn-xs">用$.post("json")来做测试</a>
-                    <a href="#" class="btn btn-primary  btn-xs">Poster</a>
-                    <a href="#" class="btn btn-primary  btn-xs">Risk</a>
-                    <a href="#" class="btn btn-primary  btn-xs">生成目录</a>
-                    <a href="#" class="btn btn-primary  btn-xs">CKtester</a>
-                    <a href="#" class="btn btn-primary  btn-xs">添加</a>
-                    <a href="#" class="btn btn-primary  btn-xs">删除</a>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+        </div>
+
+</nav>
+<div id="WikiContent" data-file="${filename}">${page}</div>
+<!--<div id="pad-float">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row-fluid">-->
+            <!--<div class="span2">-->
+                <!--<div class='btn-group-vertical col-xs-2'>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs" id="tagtask">任务:</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">用$.post("json")来做测试</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">Poster</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">Risk</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">生成目录</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">CKtester</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">添加</a>-->
+                    <!--<a href="#" class="btn btn-primary  btn-xs">删除</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <style>
-
 
     #pad-header {
         background-color: #333;
         color: #fff;
        /*#height: 48px;*/
         line-height: 16px;
-        position: fixed;
+        /*position: fixed;*/
         top: 0;
         left: 0;
         width: 100%;
@@ -78,7 +96,6 @@
         list-style: none;
          background-color: rgba(0, 0, 0, 0);
         border-radius: 4px;
-
     }
     .btn-groupfix{
         float:right;
@@ -92,27 +109,28 @@
 
     var xio;
 
-    frames[0].addEventListener('paste',pp);
+    $("#newfile").click(function(){
 
-
-
-
-
-
-    // $("#ckeditor").bootstrapSwitch();
-
+    })
 
     $("#tagop").click(function(){
         $("#tagedit").slideToggle("slow");
+    });
+    $("#tagtask").click(function(){
+
     });
     $("#edit").click(function(){
         window.frames.if.document.designMode='on';
     });
     $("#save").click(function(){
-        var filename=$('#if').attr('src');
-        var path=$("#if")[0].dataset.path;
-        window.frames.if.document.designMode='off';
-        $.post('/cutwiki/wiki/wikiSave', 	{wikipath:path,name:filename,wikiContent:window.frames.if.document.body.innerHTML},function(data){ alert(data);});
+        var filename=$('#WikiContent').data("file");
+        //var path=$("#if")[0].dataset.path;
+        //window.frames.if.document.designMode='off';
+        $.post('/wikiSave', {
+           // wikipath:path,
+            filename:filename,
+            wikiContent:$("#WikiContent")[0].innerHTML
+        },function(data){ alert(data);});
     });
     $("#upload").click(function(){
         //alert("#upload");
@@ -124,20 +142,19 @@
     $("#ckeditor").click(function(){
         if(CK==null)
         {
-            CK=CKEDITOR.replace('if');
-            CK.setData(window.frames.if.document.body.innerHTML) //设置内容
-
-
+            CK=CKEDITOR.replace('WikiContent');
+            //CK.setData(window.frames.if.document.body.innerHTML) //设置内容
 
             CKEDITOR.on('instanceReady', function (e) {
                 //  var td = document.getElementById('cke_contents_' + e.editor.name), tbody = td.parentNode.parentNode;
                 // td.style.height = h - tbody.rows[0].offsetHeight - tbody.rows[2].offsetHeight + 'px';
-                $('.cke_contents').css('height', "calc(100% - 210px)");
-                frames[1].addEventListener('paste',pp);//设置可粘贴
+                //$('.cke_contents').css('height', "calc(100% - 210px)");
+                $('.cke_contents').css('height', "calc(100% - 170px)");
+                frames[0].addEventListener('paste',doparst);//设置可粘贴
                 //setTimeout("$('.cke_contents').css('height', $('body').height()-200);",100) ;//设置一个超时对象:自动变高
             });
         }else{
-            window.frames.if.document.body.innerHTML=CK.getData();
+            $("#WikiContent")[0].innerHTML=CK.getData();
             CK.destroy();
             CK=null;
         }
@@ -154,7 +171,7 @@
         return false;
     };
 
-    function pp(e){
+    function doparst(e){
 
         var reader = new FileReader();
         var tout;
@@ -197,6 +214,8 @@
         }
     }
 
-
+    document.ready= function () {
+        frames[0].addEventListener('paste',doparst);
+    }
 
 </script>
