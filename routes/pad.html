@@ -1,0 +1,206 @@
+
+<div id="WikiContent">${page}</div>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<link   type="text/css"    href="/css/bootstrap.min.css" rel="stylesheet">
+<link   type="text/css"    href="/css/font-awesome.min.css"  rel="stylesheet" >
+
+<nav id="pad-header" class="col-xs-12" role="navigation">
+	<!--<div class="navbar-header navbar-brand" >-->
+			<!--<h2  class='myh2'>wiki</h2>-->
+	<!--</div>-->
+	<div class='col-md-6   '  >
+		<ol class="breadcrumb breadcrumbfix">
+		  <li><a href="../2.html"  id="gotoMain"  class='icon-home'>主页</a></li>
+		  <li><a href="/cutwiki/wiki"  id="gotoDeploy"  class="1active" >wiki</a></li>
+		</ol>
+	</div>
+	<!--<div class=' navbar-right'><small>@isyou</small></div>-->
+    <div class='btn-group btn-groupfix'  id='tagedit'>
+        <span href="#" id='ckeditor' 	class="btn btn-primary  btn-xs">CKeditor</span>
+        <a href="#" id='save' 	class="btn btn-primary  btn-xs">保存</a>
+        <a href="#" id='upload' class="btn btn-primary  btn-xs" >上传文件</a>
+        <a href="#" id='edit'   class="btn btn-primary  btn-xs">编辑</a>
+        <a href="#" id='exit' 	class="btn btn-primary  btn-xs">退出</a>
+        <!--<a href="#" id='tog'    class="btn btn-primary  btn-xs ">-->
+            <!--&lt;!&ndash;<i class="fa-li fa fa-check-square"></i>a&ndash;&gt;-->
+        <!--</a>-->
+    </div>
+
+        <!--<div style=""  >-->
+            <!--<span id='tagop' class="glyphicon glyphicon-list"></span>-->
+
+        <!--</div>-->
+        <!--<div class='col-xs-10'  style="min-height: 500px">-->
+
+        </div>
+
+</nav>
+
+<div id="pad-float">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div class='btn-group-vertical col-xs-2'>
+                    <a href="#" class="btn btn-primary  btn-xs" id="task">任务:</a>
+                    <a href="#" class="btn btn-primary  btn-xs">用$.post("json")来做测试</a>
+                    <a href="#" class="btn btn-primary  btn-xs">Poster</a>
+                    <a href="#" class="btn btn-primary  btn-xs">Risk</a>
+                    <a href="#" class="btn btn-primary  btn-xs">生成目录</a>
+                    <a href="#" class="btn btn-primary  btn-xs">CKtester</a>
+                    <a href="#" class="btn btn-primary  btn-xs">添加</a>
+                    <a href="#" class="btn btn-primary  btn-xs">删除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+
+    #pad-header {
+        background-color: #333;
+        color: #fff;
+       /*#height: 48px;*/
+        line-height: 16px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-width: 320px;
+        z-index: 10;
+    }
+    .breadcrumbfix{
+         padding: 1px 5px;
+         margin-bottom: 5px;
+        list-style: none;
+         background-color: rgba(0, 0, 0, 0);
+        border-radius: 4px;
+
+    }
+    .btn-groupfix{
+        float:right;
+        position: absolute;
+        right:0px;
+        z-index:9999;
+    }
+</style>
+<script >
+
+
+    var xio;
+
+    frames[0].addEventListener('paste',pp);
+
+
+
+
+
+
+    // $("#ckeditor").bootstrapSwitch();
+
+
+    $("#tagop").click(function(){
+        $("#tagedit").slideToggle("slow");
+    });
+    $("#edit").click(function(){
+        window.frames.if.document.designMode='on';
+    });
+    $("#save").click(function(){
+        var filename=$('#if').attr('src');
+        var path=$("#if")[0].dataset.path;
+        window.frames.if.document.designMode='off';
+        $.post('/cutwiki/wiki/wikiSave', 	{wikipath:path,name:filename,wikiContent:window.frames.if.document.body.innerHTML},function(data){ alert(data);});
+    });
+    $("#upload").click(function(){
+        //alert("#upload");
+        $("#uppc")[0].click();
+        upac();
+    });
+
+    var CK;
+    $("#ckeditor").click(function(){
+        if(CK==null)
+        {
+            CK=CKEDITOR.replace('if');
+            CK.setData(window.frames.if.document.body.innerHTML) //设置内容
+
+
+
+            CKEDITOR.on('instanceReady', function (e) {
+                //  var td = document.getElementById('cke_contents_' + e.editor.name), tbody = td.parentNode.parentNode;
+                // td.style.height = h - tbody.rows[0].offsetHeight - tbody.rows[2].offsetHeight + 'px';
+                $('.cke_contents').css('height', "calc(100% - 210px)");
+                frames[1].addEventListener('paste',pp);//设置可粘贴
+                //setTimeout("$('.cke_contents').css('height', $('body').height()-200);",100) ;//设置一个超时对象:自动变高
+            });
+        }else{
+            window.frames.if.document.body.innerHTML=CK.getData();
+            CK.destroy();
+            CK=null;
+        }
+    });
+    function  upac(){
+        $.ajaxFileUpload(
+                {
+                    url:'upload.php', //你处理上传文件的服务端
+                    secureuri:false,
+                    fileElementId:'uppc',
+                    dataType: 'json',
+                    success: function (data){ alert(data.file_infor);}
+                })
+        return false;
+    };
+
+    function pp(e){
+
+        var reader = new FileReader();
+        var tout;
+
+        if(e.clipboardData.types.indexOf('Files') > -1)
+        {
+            console.log("data:" + e.clipboardData);
+            console.log("types:"+ e.clipboardData.types);
+            console.log("getData:"+ e.clipboardData.getData("img/*"));
+            //console.log("files[0]:"+ e.clipboardData.files[0]);
+            console.log("items[0]:"+ e.clipboardData.items[0]);
+
+            var it=e.clipboardData.items[0];
+            //	console.log("items[0].getData():"+ it.getData());
+            reader.readAsDataURL( it.getAsFile());
+            console.log("tout:",tout);
+            console.log("reader",reader);
+            console.log("text:"+reader.result.toString());//为结果文件
+            xio=reader; //注意读取有时间限制!! 要使用onload来读取结果
+            e.clipboardData.setData("text/plain", '<img src="' + reader.result +'" >');
+            console.log(e.srcElement);
+            reader.onload=function(ev){
+                console.log("<img src=\"" + reader.result+"\" >");
+                $(e.srcElement).append(  "<img src=\"" + reader.result+"\" >" )  ;
+            };
+ 
+
+
+
+            e.preventDefault();
+            console.log(e);
+            //  	'<img src="' + reader.result +'" >';//生成图片,然后把图片加入就好了.
+        }
+
+    };
+
+    document.onkeydown=function(event){
+        var e=event||window.event;
+        var keyCode=e.keyCode||e.which;
+        if(e.ctrlKey && (keyCode == 83 ))
+        {
+            $("#f").submit();
+            e.returnValue=false;
+        }
+    }
+
+
+
+</script>
