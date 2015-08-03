@@ -12,8 +12,8 @@
 	<!--</div>-->
 	<div class='col-md-6   '  >
 		<ol class="breadcrumb breadcrumbfix">
-		  <li><a href="../2.html"  id="gotoMain"  class='icon-home'>主页</a></li>
-		  <li><a href="/cutwiki/wiki"  id="gotoDeploy"  class="1active" >wiki</a></li>
+		  <li><a href="/"  id="gotoMain"  class='icon-home'>主页</a></li>
+		  <li><a href="/test.html"  id="gotoDeploy"  class="1active" >wiki</a></li>
 		</ol>
 	</div>
 	<!--<div class=' navbar-right'><small>@isyou</small></div>-->
@@ -22,7 +22,7 @@
         <a href="#" id='save' 	class="btn btn-primary  btn-xs">保存</a>
         <a href="#" id='upload' class="btn btn-primary  btn-xs">上传文件</a>
         <a href="#" id='edit'   class="btn btn-primary  btn-xs">编辑</a>
-        <a href="#" id='newfile'   class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#myModal">新建</a>
+        <a href="#" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#myModal">新建</a>
         <a href="#" id='exit' 	class="btn btn-primary  btn-xs">退出</a>
         <!--<a href="#" id='tog'    class="btn btn-primary  btn-xs ">-->
             <!--&lt;!&ndash;<i class="fa-li fa fa-check-square"></i>a&ndash;&gt;-->
@@ -43,11 +43,17 @@
                     <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class=" ">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">文件名</span>
+                            <input id="thfilename" type="text" class="form-control" placeholder="qwer/abc.html" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="newfile">立即新建文件</button>
                 </div>
             </div>
         </div>
@@ -110,9 +116,18 @@
     var xio;
 
     $("#newfile").click(function(){
+        $.post('/wikiAdd', {
+            filename:thfilename.value,
+           // wikiContent:$("#WikiContent")[0].innerHTML
+        },function(data){
+//            if (data.redirect) {
+//                // data.redirect contains the string URL to redirect to
+                window.location.href = "/"+thfilename.value
+//            }else
+            //alert(data);
 
-    })
-
+        });
+    });
     $("#tagop").click(function(){
         $("#tagedit").slideToggle("slow");
     });
