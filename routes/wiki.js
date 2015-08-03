@@ -9,7 +9,7 @@ fs.readFile(path.join(__dirname, 'pad.html'),function(err,data){
 });
 
 
-router.all("/*.html", function(request, response, next) {
+router.all("/*.*", function(request, response, next) {
 
   //  console.log(request.params[0]);
     var filename=path.join(__dirname,'..',"public", request.params[0]+".html");
@@ -128,8 +128,10 @@ function mkdirsSync(dirpath, mode) {
         var pathtmp;
        // var count;
         dirpath.split(path.sep).forEach(function(dirname) {
-            if(dirname.indexOf(".html") != -1
-            ||dirname.indexOf(".htm") != -1) return;
+            if ((dirname.indexOf(".html") > -1
+            ||dirname.indexOf(".htm")  > -1
+            ||dirname.indexOf(".")  > -1
+            || dirname.indexOf(".txt")  >-1 )) return;
             if(dirname=="") return;
             if (pathtmp) {
                 pathtmp = path.join(pathtmp, dirname);
