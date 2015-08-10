@@ -39,6 +39,13 @@ router.use("/wikiSave", function(request, response, next) {
     fs.writeFile(request.body.filename,request.body.wikiContent,function(err){
         if(err)
             console.log(err+request.body.filename,request.body.wikiContent);
+        var exec = require('child_process').exec;
+            exec('git add *& git commit -m "ok" ',
+                function (error, stdout, stderr) {
+                    if (error !== null) {
+                        console.log('git error: ' + error);
+                    }
+                });
 
     });
     response.send("ok");
