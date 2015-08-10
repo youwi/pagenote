@@ -40,11 +40,13 @@ router.use("/wikiSave", function(request, response, next) {
         if(err)
             console.log(err+request.body.filename,request.body.wikiContent);
         var exec = require('child_process').exec;
-            exec('git add *& git commit -m "ok" ',
+            exec('git add * && git commit -m "ok" ',
                 function (error, stdout, stderr) {
                     if (error !== null) {
                         console.log('git error: ' + error);
                     }
+                    console.log(' 成功加入git版本控制 ' );
+
 
                 });
 
