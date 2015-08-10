@@ -45,6 +45,7 @@ router.use("/wikiSave", function(request, response, next) {
                     if (error !== null) {
                         console.log('git error: ' + error);
                     }
+
                 });
 
     });
