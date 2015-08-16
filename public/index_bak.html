@@ -1,0 +1,367 @@
+
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<link   type="text/css"    href="/css/bootstrap.min.css" rel="stylesheet">
+<link   type="text/css"    href="/css/font-awesome.min.css"  rel="stylesheet" >
+
+
+<div class="desk">
+    <ul>
+        <li>新建文件夹</li>
+        <li onclick="menu(2)">添加便签</li>
+        <li onclick="menu(3)">清空便签</li>
+        <li>刷新</li>
+        <li>上传资料</li>
+        <li>更换背景</li>
+        <li>注销</li>
+    </ul>
+</div>
+
+
+
+<div class="container" style="margin-top:30px;">
+    <div class="row">
+        <div class="col-md-4">
+            <ul id="treeroot"></ul>
+
+        </div>
+
+
+        <!--<div class="col-md-4">-->
+            <!--<p class="well" style="height:135px;"><strong>Initialization optional parameters</strong>-->
+
+                <!--<br /> <code>$('#tree2').treed({openedClass : 'glyphicon-folder-open', closedClass : 'glyphicon-folder-close'});</code>-->
+
+            <!--</p>-->
+            <!--<ul id="tree2">-->
+                <!--<li>ABC-->
+                    <!--<ul>-->
+                        <!--<li>Company Maintenance</li>-->
+                        <!--<li>Employees-->
+                            <!--<ul>-->
+                                <!--<li>Reports-->
+                                    <!--<ul>-->
+                                        <!--<li>Report1</li>-->
+                                        <!--<li>Report2</li>-->
+                                        <!--<li>Report3</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li>Employee Maint.</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li>Human Resources</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li>XRP-->
+                    <!--<ul>-->
+                        <!--<li>Company Maintenance</li>-->
+                        <!--<li>Employees-->
+                            <!--<ul>-->
+                                <!--<li>Reports-->
+                                    <!--<ul>-->
+                                        <!--<li>Report1</li>-->
+                                        <!--<li>Report2</li>-->
+                                        <!--<li>Report3</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li>Employee Maint.</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li>Human Resources</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col-md-4">-->
+            <!--<p class="well" style="height:135px;"><strong>Initialization optional parameters</strong>-->
+
+                <!--<br /> <code>$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});</code>-->
+
+            <!--</p>-->
+            <!--<ul id="tree3">-->
+                <!--<li><a href="#">TECH</a>-->
+
+                    <!--<ul>-->
+                        <!--<li>Company Maintenance</li>-->
+                        <!--<li>Employees-->
+                            <!--<ul>-->
+                                <!--<li>Reports-->
+                                    <!--<ul>-->
+                                        <!--<li>Report1</li>-->
+                                        <!--<li>Report2</li>-->
+                                        <!--<li>Report3</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li>Employee Maint.</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li>Human Resources</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li>XRP-->
+                    <!--<ul>-->
+                        <!--<li>Company Maintenance</li>-->
+                        <!--<li>Employees-->
+                            <!--<ul>-->
+                                <!--<li>Reports-->
+                                    <!--<ul>-->
+                                        <!--<li>Report1</li>-->
+                                        <!--<li>Report2</li>-->
+                                        <!--<li>Report3</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li>Employee Maint.</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li>Human Resources</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    </div>
+</div>
+<style>
+
+    .tree, .tree ul {
+        margin:0;
+        padding:0;
+        list-style:none
+    }
+    .tree ul {
+        margin-left:1em;
+        position:relative
+    }
+    .tree ul ul {
+        margin-left:.5em
+    }
+    .tree ul:before {
+        content:"";
+        display:block;
+        width:0;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        border-left:1px solid
+    }
+    .tree li {
+        margin:0;
+        padding:0 1em;
+        /*line-height:2em;*/
+        color:#369;
+        font-weight:700;
+        position:relative
+    }
+    .tree ul li:before {
+        content:"";
+        display:block;
+        width:10px;
+        height:0;
+        border-top:1px solid;
+        margin-top:-1px;
+        position:absolute;
+        top:1em;
+        left:0
+    }
+    .tree ul li:last-child:before {
+        background:#fff;
+        height:auto;
+        top:1em;
+        bottom:0
+    }
+    .indicator {
+        margin-right:5px;
+    }
+    .tree li a {
+        text-decoration: none;
+        color:#369;
+    }
+    .tree li button, .tree li button:active, .tree li button:focus {
+        text-decoration: none;
+        color:#369;
+        border:none;
+        background:transparent;
+        margin:0px 0px 0px 0px;
+        padding:0px 0px 0px 0px;
+        outline: 0;
+    }
+
+
+
+
+
+
+
+
+    /*desk start*/
+    .desk{
+        /*width:200px;*/
+        background:#FFF;box-shadow: 1px 1px 10px 1px #000;position:absolute;top:100px;left:200px;display:none;z-index:2;}
+    .desk ul li{border-bottom:1px solid #E4E4E4;list-style:none;
+        /*line-height:34px;*/
+        /*font-size:14px;*/
+        padding-left:5px;}
+    .desk ul li:hover{background:#647E7C;color:#fff;}
+    .desk ul {padding-left: 0px}
+    /*end desk*/
+
+    .text{font-size:30px;color:#fff;}
+    .tz_box{position:relative;}
+    .tz_box .b_list{width:294px;height:310px;position:absolute;left:300px;top:200px;z-index:1;}
+    .tz_box .b_list .b_content{width:256px;height:220px;position:absolute;top:60px;left:16px;outline:none;font-size:20px;line-height:30px;}
+    .tz_box .b_list .b_timer{position:absolute;bottom:15px;right:10px;font-size:14px;}
+
+</style>
+<script>
+
+
+    $.fn.extend({
+        treed: function (o) {
+
+            var openedClass = 'glyphicon-minus-sign';
+            var closedClass = 'glyphicon-plus-sign';
+
+            if (typeof o != 'undefined') {
+                if (typeof o.openedClass != 'undefined') {
+                    openedClass = o.openedClass;
+                }
+                if (typeof o.closedClass != 'undefined') {
+                    closedClass = o.closedClass;
+                }
+            }
+            ;
+
+//initialize each of the top levels
+    var tree = $(this);
+    tree.addClass("tree");
+    tree.find('li').has("ul").each(function () {
+        var branch = $(this); //li with children ul
+        branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+        branch.addClass('branch');
+        branch.on('click', function (e) {
+            if (this == e.target) {
+                var icon = $(this).children('i:first');
+                icon.toggleClass(openedClass + " " + closedClass);
+                $(this).children().children().toggle();
+            }
+           // console.log("click++")
+        })
+        branch.children().children().toggle();
+    });
+//fire event from the dynamically added icon
+    tree.find('.branch .indicator').each(function () {
+        $(this).on('click', function () {
+            $(this).closest('li').click();
+          //  console.log("click++")
+        });
+    });
+//fire event to open branch if the li contains an anchor instead of text
+//    tree.find('.branch>a').each(function () {
+//        $(this).on('click', function (e) {
+//            $(this).closest('li').click();
+//            e.preventDefault();
+//           // console.log("click++")
+//        });
+//    });
+//fire event to open branch if the li contains a button instead of text
+    tree.find('.branch>button').each(function () {
+        $(this).on('click', function (e) {
+            $(this).closest('li').click();
+            e.preventDefault();
+           // console.log("click++")
+        });
+    });
+}
+});
+
+//Initialization of treeviews
+//var domtree="";
+var tmp2;
+$.getJSON("/wikiList",function(json){
+     //var domtree="<ul id=treeroot'>";
+   var domtree="<li>root\n";
+    domtree= buildTree(json);
+    domtree +="</li>";
+    tmp2=domtree;
+
+  //  console.log(convert(json));
+   // $("#tree1")[0].innerHTML=domtree;
+    var tmp= "<ul>root" +
+            "<li>dir1" +
+            "<ul><li>fil1</li>" +
+            "   <li>file2</li>" +
+            "   <li>dir2" +
+            "       <ul>" +
+            "           <li><a href='baidu.com'>file3</a></li>" +
+            "           <li>file4</li>" +
+            "       </ul>" +
+            "   </li>" +
+            "</ul>" +
+            "</li>";//domtree;//.append( domtree );
+
+
+
+
+            ;
+    $("#treeroot").append(domtree);
+    $('#treeroot').treed();
+
+    $("#treeroot a").each(function(){
+
+//        $(this)[0].oncontextmen=function(){
+//            return false;
+//        };
+        $(this).mousedown(function(e){
+            var key = e.which; // 鼠标键位（右键3，左键1，滚轮2）
+            if(key == 3){
+                var x = e.clientX;
+                var y = e.clientY;
+                $(".text").html("X: "+x+" Y: "+y);
+                $(".desk").show().css({left:x,top:y});
+            }
+
+        })
+
+    });
+});
+
+function buildTree(node,dir){
+    //domtree+="<li>root";
+    var domtree="";
+    dir=dir||"";
+    for(child in node){
+
+
+        if(child!="filename")
+        {
+            domtree+="<li>"+child;
+            domtree+=buildTree(node[child],dir+"/"+child);
+            domtree+="</li>\n";
+
+        }else{
+
+            domtree+="<ul>"
+            for(var i=0;i< node[child].length;i++)
+                domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
+
+        }
+    }
+    domtree+="</ul>\n";
+
+    return domtree||"";
+
+}
+function tt(){
+
+
+}
+$('#tree1').treed();
+
+$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
+
+$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
+
+
+</script>

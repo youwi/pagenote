@@ -87,7 +87,7 @@ router.use("/wikiList", function(request, response, next) {
 
     //process.chdir("../public");
 //console.log(geFileList("."));
-    response.send( JSON.stringify(geFileList( __dirname+"/../public") ));
+    response.send( JSON.stringify(geFileList( __dirname+"/../doc") ));
 
 
 

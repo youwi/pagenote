@@ -1,128 +1,661 @@
 
-
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<link   type="text/css"    href="/css/bootstrap.min.css" rel="stylesheet">
-<link   type="text/css"    href="/css/font-awesome.min.css"  rel="stylesheet" >
-
-
-<div class="desk">
-    <ul>
-        <li>新建文件夹</li>
-        <li onclick="menu(2)">添加便签</li>
-        <li onclick="menu(3)">清空便签</li>
-        <li>刷新</li>
-        <li>上传资料</li>
-        <li>更换背景</li>
-        <li>注销</li>
-    </ul>
-</div>
+<!--这里是主页架子-->
 
 
 
-<div class="container" style="margin-top:30px;">
-    <div class="row">
-        <div class="col-md-4">
-            <ul id="treeroot"></ul>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
+<link href="css/messenger-spinner.css" rel="stylesheet">
+<link href="css/messenger-theme-flat.css" rel="stylesheet">
+<link href="css/messenger.css" rel="stylesheet">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/messenger.min.js"></script>
+<script src="js/messenger-theme-flat.js"></script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" ">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">文件名</span>
+                        <input id="thfilename" type="text" class="form-control" placeholder="qwer/abc.html" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="newfile">立即新建文件</button>
+            </div>
         </div>
-
-
-        <!--<div class="col-md-4">-->
-            <!--<p class="well" style="height:135px;"><strong>Initialization optional parameters</strong>-->
-
-                <!--<br /> <code>$('#tree2').treed({openedClass : 'glyphicon-folder-open', closedClass : 'glyphicon-folder-close'});</code>-->
-
-            <!--</p>-->
-            <!--<ul id="tree2">-->
-                <!--<li>ABC-->
-                    <!--<ul>-->
-                        <!--<li>Company Maintenance</li>-->
-                        <!--<li>Employees-->
-                            <!--<ul>-->
-                                <!--<li>Reports-->
-                                    <!--<ul>-->
-                                        <!--<li>Report1</li>-->
-                                        <!--<li>Report2</li>-->
-                                        <!--<li>Report3</li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
-                                <!--<li>Employee Maint.</li>-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                        <!--<li>Human Resources</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li>XRP-->
-                    <!--<ul>-->
-                        <!--<li>Company Maintenance</li>-->
-                        <!--<li>Employees-->
-                            <!--<ul>-->
-                                <!--<li>Reports-->
-                                    <!--<ul>-->
-                                        <!--<li>Report1</li>-->
-                                        <!--<li>Report2</li>-->
-                                        <!--<li>Report3</li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
-                                <!--<li>Employee Maint.</li>-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                        <!--<li>Human Resources</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-md-4">-->
-            <!--<p class="well" style="height:135px;"><strong>Initialization optional parameters</strong>-->
-
-                <!--<br /> <code>$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});</code>-->
-
-            <!--</p>-->
-            <!--<ul id="tree3">-->
-                <!--<li><a href="#">TECH</a>-->
-
-                    <!--<ul>-->
-                        <!--<li>Company Maintenance</li>-->
-                        <!--<li>Employees-->
-                            <!--<ul>-->
-                                <!--<li>Reports-->
-                                    <!--<ul>-->
-                                        <!--<li>Report1</li>-->
-                                        <!--<li>Report2</li>-->
-                                        <!--<li>Report3</li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
-                                <!--<li>Employee Maint.</li>-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                        <!--<li>Human Resources</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li>XRP-->
-                    <!--<ul>-->
-                        <!--<li>Company Maintenance</li>-->
-                        <!--<li>Employees-->
-                            <!--<ul>-->
-                                <!--<li>Reports-->
-                                    <!--<ul>-->
-                                        <!--<li>Report1</li>-->
-                                        <!--<li>Report2</li>-->
-                                        <!--<li>Report3</li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
-                                <!--<li>Employee Maint.</li>-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                        <!--<li>Human Resources</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
     </div>
 </div>
+
+
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top navbar-layoutit  navfix">
+    <div class="navbar-header navfix">
+        <button data-target="navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+            <span class="glyphicon-bar"></span>
+            <span class="glyphicon-bar"></span>
+            <span class="glyphicon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Case<span class="label label-default">.....</span></a>
+    </div>
+    <div class="collapse navbar-collapse navfix">
+
+<!--
+        <ul class="nav pull-right navfix">
+            <li>
+                <div class="btn-group">
+                    <a class="btn btn-xs btn-info" href="#">关于我们</a>
+                </div>
+
+
+                <div class="btn-group" data-toggle="buttons-radio">
+                    <button href="template/feedback.html" role="button" data-toggle="modal" data-target="#feedbackModal" id="feedback" class="btn btn-xs btn-primary">
+                        <i class="glyphicon-comment glyphicon"></i> 问题反馈</button>
+                </div>
+            </li>
+        </ul>-->
+        <label id="d_filename" class="nav "></label>
+        <ul class="nav navfix  pull-right" id="menu-layoutit">
+            <li>
+                <div class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" id="edit" class="active btn btn-xs btn-primary">
+                        <!--<i class="glyphicon glyphicon-edit "></i>-->
+                        编辑</button>
+                    <button type="button" class="btn btn-xs btn-primary" id="save">
+                        <!--<i class="glyphicon-eye-close glyphicon"></i>-->
+                        保存</button>
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">
+                        <!--<i class="glyphicon-eye-open glyphicon"></i> -->
+                        新建</button>
+                <!--</div>-->
+                <!--<div class="btn-group">-->
+                    <button type="button" class="btn btn-xs btn-primary" id="runcurr" data-target="#downloadModal" href="template/download.html" role="button" data-toggle="modal">
+                        <!--<i class="glyphicon-chevron-down glyphicon"></i>-->
+                        运行</button>
+                    <button class="btn btn-xs btn-primary" id="button-share-modal" href="template/saveLayout.html" role="button" data-toggle="modal" data-target="#shareModal">
+                        <!--<i class="glyphicon-share glyphicon"></i>-->
+                        保存</button>
+                    <button class="btn btn-xs btn-primary" href="#clear" id="clear"><i class="glyphicon-trash glyphicon"></i> 删除</button>
+
+                </div>
+ <!--               <div class="input-group input-group-sm col-xs-3">
+                    <span class="input-group-addon" id="sizing-addon3">@</span>
+                    <input type="text" class="form-control" placeholder="url" aria-describedby="sizing-addon3">
+                </div>-->
+
+            </li>
+        </ul>
+    </div><!--/.navbar-collapse -->
+</div>
+
+
+<div class="sidebar-nav">
+
+    <ul class="nav nav-list accordion-group">
+        <li class="nav-header">
+            <!--<i class="glyphicon-plus glyphicon"></i>文件列表-->
+            <!--<i class="glyphicon-plus glyphicon"></i>-->
+            <!--<input id="d_rootname">-->
+            <!--<div class="pull-right popover-info"><i class="glyphicon glyphicon-question-sign"></i>-->
+                <!--<div class="popover fade right"><div class="arrow"></div>-->
+                    <!--<h3 class="popover-title">提示：</h3>-->
+                    <!--<div class="popover-content">文件列表制作中</div></div>-->
+            <!--</div>-->
+            /root
+        </li>
+        <ul id="treeroot"></ul>
+    </ul>
+
+</div>
+
+
+<script>
+    $.fn.extend({
+        treed: function (o) {
+
+            var openedClass = 'glyphicon-minus-sign';
+            var closedClass = 'glyphicon-plus-sign';
+
+            if (typeof o != 'undefined') {
+                if (typeof o.openedClass != 'undefined') {
+                    openedClass = o.openedClass;
+                }
+                if (typeof o.closedClass != 'undefined') {
+                    closedClass = o.closedClass;
+                }
+            }
+            ;
+
+//initialize each of the top levels
+            var tree = $(this);
+            tree.addClass("tree");
+            tree.find('li').has("ul").each(function () {
+                var branch = $(this); //li with children ul
+                branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+                branch.addClass('branch');
+                branch.on('click', function (e) {
+                    if (this == e.target) {
+                        var icon = $(this).children('i:first');
+                        icon.toggleClass(openedClass + " " + closedClass);
+                        $(this).children().children().toggle();
+                    }
+                    // console.log("click++")
+                })
+                branch.children().children().toggle();
+            });
+//fire event from the dynamically added icon
+            tree.find('.branch .indicator').each(function () {
+                $(this).on('click', function () {
+                    $(this).closest('li').click();
+                    //  console.log("click++")
+                });
+            });
+//fire event to open branch if the li contains an anchor instead of text
+//    tree.find('.branch>a').each(function () {
+//        $(this).on('click', function (e) {
+//            $(this).closest('li').click();
+//            e.preventDefault();
+//           // console.log("click++")
+//        });
+//    });
+//fire event to open branch if the li contains a button instead of text
+            tree.find('.branch>button').each(function () {
+                $(this).on('click', function (e) {
+                    $(this).closest('li').click();
+                    e.preventDefault();
+                    // console.log("click++")
+                });
+            });
+        }
+    });
+
+</script>
+<script>
+
+
+
+
+    $("#tagop").click(function () {
+        $("#tagedit").slideToggle("slow");
+    });
+    $("#tagtask").click(function () {
+    });
+    $("#edit").click(function () {
+        window.frames.if.document.designMode = 'on';
+    });
+    $("#save").click(save=function () {
+        // var filename = $('#WikiContent').data("file");
+        $.ajax({
+            url: '/caseSave',
+            data:{ filename: currfile,  wikiContent: ace_editor.getValue()},
+            method:"POST",
+            success:function (data) {
+                $.globalMessenger().post({
+                    message: data,
+                    hideAfter:1,
+                    type: 'error',
+                    showCloseButton: true
+                })
+            },
+            error:function(err){
+                $.globalMessenger().post({
+                    message: err.status,
+                    hideAfter:1,
+                    type: 'error',
+                    showCloseButton: true
+                })
+                console.log("出错");
+            },
+        });
+    });
+    $("#upload").click(function () {
+        //$.globalMessenger().post("#upload");
+        $("#uppc")[0].click();
+        upac();
+    });
+    $("#newfile").click(function(){
+        $.post('/caseAdd', {
+            filename:thfilename.value,
+        },function(data){
+            $.globalMessenger().post(data);
+            $("#myModal").hide();
+            refreshTree();
+            //window.location.href = "/"+thfilename.value
+        });
+    });
+    $("#runcurr").click(function () {
+        // var filename = $('#WikiContent').data("file");
+
+        $.ajax({
+            url: '/caseRun',
+            data:{ filename: currfile},
+            method:"POST",
+            success:suc=function(data){
+                var json;
+                try{
+                    json= JSON.parse(data)
+                }catch(e){
+                    json={"转换为:":data};
+                    console.log("转换出错");
+                }
+                editor_out_json.set(json);
+                editor_out_raw.set(data);
+                $('#tabs-154688 li:eq(4) a').tab('show');
+                $.globalMessenger().post({
+                    message: 'ok',
+                    hideAfter:1,
+                    type: 'error',
+                    showCloseButton: true
+                });
+            },
+            error:function(err){
+                if(err.status==200){
+                    suc(err.responseText)
+
+                }
+                $('#tabs-154688 li:eq(3) a').tab('show');
+                console.log("出错");
+                $.globalMessenger().post({
+                    message: err.status,
+                    hideAfter:1,
+                    type: 'error',
+                    showCloseButton: true
+                });
+            }
+        });
+    });
+
+    function refreshTree(){
+        $('#treeroot').empty();
+        $.getJSON("/wikiList?root="+$("myroot").val(),function(json){
+
+            var domtree="<li>root\n";
+            domtree= buildTree(json);
+            domtree +="</li>";
+            tmp2=domtree;
+            $("#treeroot").append(domtree);
+            $('#treeroot').treed();
+
+
+            $("#treeroot a").click(function(){
+                currfile=$(this)[0].href;
+                $("#d_filename").text(currfile);
+                $.ajax({
+                    url: currfile,
+                    method:"GET",
+                    success:suc=function(data){
+                        $("#WikiBody").html(data);
+                    },
+                    error:function(err){
+                        //如果是js文件加载执行以后
+                        //readyState: 4, responseText: "{"a":"aaaa"↵}", status: 200, statusText: "OK"}
+                        if(err.status==200){
+                            suc(err.responseText)
+                            //editor_text.set(JSON.parse(err.responseText));
+                            //editor_tree.set(JSON.parse(err.responseText));
+                            //ace_editor.setValue(err.responseText);
+                        }
+                        console.log("出错");
+                    }
+                });
+                //
+                //$.get(currfile, function (data) {
+                //
+                //    editor_text.set(cc);
+                //    editor_tree.set(cc);
+                //    ace_editor.setValue(data);
+                //    //$.globalMessenger().post(data);
+                //});
+
+
+
+
+                return false;
+            })
+            //
+//        $("#treeroot a").each(function(){
+//
+////        $(this)[0].oncontextmen=function(){
+////            return false;
+////        };
+//            $(this).mousedown(function(e){
+//                var key = e.which; // 鼠标键位（右键3，左键1，滚轮2）
+//                if(key == 3){
+//                    var x = e.clientX;
+//                    var y = e.clientY;
+//                    $(".text").html("X: "+x+" Y: "+y);
+//                    $(".desk").show().css({left:x,top:y});
+//                }
+//                if(key == 1){
+//                    var x = e.clientX;
+//                    var y = e.clientY;
+//                    $(".text").html("X: "+x+" Y: "+y);
+//                    $(".desk").show().css({left:x,top:y});
+//                    if (e.preventDefault) {
+//                        e.preventDefault();
+//                    } else {
+//                        e.returnValue = false;
+//                    }
+//                    e.stopPropagation();
+//                    console.log("ab");
+//                  //  return false;
+//
+//                }
+//
+//            })
+//
+//        });
+        });
+    }
+    function buildTree(node,dir){
+        //domtree+="<li>root";
+        var domtree="";
+        dir=dir||"";
+        for(child in node){
+
+
+            if(child!="filename")
+            {
+                domtree+="<li>"+child;
+                domtree+=buildTree(node[child],dir+"/"+child);
+                domtree+="</li>\n";
+
+            }else{
+
+                domtree+="<ul>"
+                for(var i=0;i< node[child].length;i++)
+                    domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
+
+            }
+        }
+        domtree+="</ul>\n";
+
+        return domtree||"";
+
+    }
+
+
+    document.onkeydown = function (event) {
+        var e = event || window.event;
+        var keyCode = e.keyCode || e.which;
+        if (e.ctrlKey && (keyCode == 83 )) { // CTRL +S
+            // console.log("保存");     // $("#f").submit();    //  save();
+            $("#save").trigger("click");
+            e.returnValue = false;
+        }else if(e.ctrlKey && (keyCode == 82 )){ // CTRL+R
+            $("#runcurr").trigger("click");
+            e.returnValue = false;
+        }
+    };
+
+    $(document).ready( function () {
+        refreshTree();
+
+    });
+    $._messengerDefaults = {
+        extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-left',
+        theme: 'flat',
+        hideAfter: 1
+    };
+
+
+
+</script>
+
+
 <style>
+    .tree, .tree ul {
+        margin:0;
+        padding:0;
+        list-style:none
+    }
+    .tree ul {
+        margin-left:1em;
+        position:relative
+    }
+    .tree ul ul {
+        margin-left:.5em
+    }
+    .tree ul:before {
+        content:"";
+        display:block;
+        width:0;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        border-left:1px solid
+    }
+    .tree li {
+        margin:0;
+        padding:0 1em;
+        /*line-height:2em;*/
+        color:#369;
+        font-weight:700;
+        position:relative
+    }
+    .tree ul li:before {
+        content:"";
+        display:block;
+        width:10px;
+        height:0;
+        border-top:1px solid;
+        margin-top:-1px;
+        position:absolute;
+        top:1em;
+        left:0
+    }
+    .tree ul li:last-child:before {
+        background:#CCC;
+        height:auto;
+        top:1em;
+        bottom:0
+    }
+    .indicator {
+        margin-right:5px;
+    }
+    .tree li a {
+        text-decoration: none;
+        color:#369;
+    }
+    .tree li button, .tree li button:active, .tree li button:focus {
+        text-decoration: none;
+        color:#369;
+        border:none;
+        background:transparent;
+        margin:0px 0px 0px 0px;
+        padding:0px 0px 0px 0px;
+        outline: 0;
+    }
+    </style>
+
+<div id="WikiBody">
+
+</div>
+
+
+<style>
+
+    body{
+        line-height: 1
+    }
+
+    .jsoneditor div.tree button {
+        height: 18px;
+
+    }
+    .container-fluid:after{
+        content:none !important;
+        color: #0f0f0f;
+    }
+
+    .tree ul li:before {
+        margin-top: -6px;
+    }
+
+    pre {
+        margin-bottom: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .jsoneditor .field.highlight, .jsoneditor .field[contenteditable=true]:focus, .jsoneditor .field[contenteditable=true]:hover, .jsoneditor .value.highlight, .jsoneditor .value[contenteditable=true]:focus, .jsoneditor .value[contenteditable=true]:hover {
+        background-color: rgba(192, 192, 86, 0.38);
+        border: 1px solid rgba(218, 218, 132, 0.35);
+        border-radius: 2px;
+    }
+
+    .jsoneditor .separator {
+        padding: 0px 0;
+    }
+
+    /*修正上下高度
+    */
+    .jsoneditor .field, .jsoneditor .readonly, .jsoneditor .value {
+        border: 1px solid transparent;
+        min-height: 12px;
+        min-width: 32px;
+        padding: 0px;
+        margin: 0px;
+        word-wrap: break-word;
+        float: left;
+    }
+
+    .height100{
+        height: calc(100% - 0px);
+    }
+
+    .input-group[class*=col-] {
+        float: right;
+    }
+    #d_filename{
+        color: wheat;
+    }
+
+    #filelist{
+        width: 125px;
+        float: left;
+        padding: 15px 0 15px 15px;
+        height: 100%;
+    }
+    .sidebar-nav {
+        position: fixed;
+        width: 190px;
+        left: 0px;
+        bottom: 0;
+        top: 24px;
+        background: #ccc;
+        /* padding: 10px 15px;*/
+        z-index: 10;
+        -webkit-transition: all 500ms ease;
+        -moz-transition: all 500ms ease;
+        -ms-transition: all 500ms ease;
+        -o-transition: all 500ms ease;
+        transition: all 500ms ease;
+    }
+
+
+    .nav>li>a {
+        /*
+           修正tab标签页的边距
+        */
+        position: relative;
+        display: block;
+        padding: 1px 5px;
+    }
+    .navfix{
+        /*
+            修正导航条的高度
+        */
+        height:24px !important;
+    }
+    .navbar-layoutit {
+        min-height: 32px;
+        padding: 5px;
+        height:33px;
+    }
+    #d_filename{
+        padding-top: 5px;
+    }
+
+    .navbar-brand {
+        float: left;
+        height: 24px;
+    }
+    .navbar {
+    // position: relative;
+    //min-height: 24px;
+        margin-bottom: 0px;
+        -moz-box-shadow:0px 2px 5px #333333; -webkit-box-shadow:0px 2px 5px #333333; box-shadow:0px 2px 5px #333333;
+    }
+    .navbar-layoutit {
+        min-height: 24px;
+        padding: 0px;
+        height: 24px;
+    }
+    .outfix{
+        float:right !important;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        color: #555;
+        cursor: default;
+        background-color: #D5DDF6;
+    }
+
+    .jsoneditor{
+        border-top-width: 0px;
+    }
+    body {
+        /*
+        修正导航条和35像素和 滚动条
+        */
+        height: calc(100% - 24px);
+        padding-top: 26px;
+        padding-bottom: 1px;
+        margin-left: 200px;
+        -webkit-transition: margin 500ms ease;
+        -moz-transition: margin 500ms ease;
+        -ms-transition: margin 500ms ease;
+        -o-transition: margin 500ms ease;
+        transition: margin 500ms ease;
+    }
+
+    .navbar-layoutit .navbar-brand {
+        width: 180px;
+        color: #fff;
+        padding: 0;
+        margin: 0 5px;
+    }
+
+    .navbar-layoutit .navbar-brand .label {
+        position: relative;
+        left: 10px;
+        top: -3px;
+        font-weight: normal;
+        font-size: 9px;
+        background: #666;
+        -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+        -moz-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+        box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
 
     .tree, .tree ul {
         margin:0;
@@ -166,7 +699,7 @@
         left:0
     }
     .tree ul li:last-child:before {
-        background:#fff;
+        background:#CCC;
         height:auto;
         top:1em;
         bottom:0
@@ -187,181 +720,6 @@
         padding:0px 0px 0px 0px;
         outline: 0;
     }
-
-
-
-
-
-
-
-
-    /*desk start*/
-    .desk{
-        /*width:200px;*/
-        background:#FFF;box-shadow: 1px 1px 10px 1px #000;position:absolute;top:100px;left:200px;display:none;z-index:2;}
-    .desk ul li{border-bottom:1px solid #E4E4E4;list-style:none;
-        /*line-height:34px;*/
-        /*font-size:14px;*/
-        padding-left:5px;}
-    .desk ul li:hover{background:#647E7C;color:#fff;}
-    .desk ul {padding-left: 0px}
-    /*end desk*/
-
-    .text{font-size:30px;color:#fff;}
-    .tz_box{position:relative;}
-    .tz_box .b_list{width:294px;height:310px;position:absolute;left:300px;top:200px;z-index:1;}
-    .tz_box .b_list .b_content{width:256px;height:220px;position:absolute;top:60px;left:16px;outline:none;font-size:20px;line-height:30px;}
-    .tz_box .b_list .b_timer{position:absolute;bottom:15px;right:10px;font-size:14px;}
-
 </style>
-<script>
 
 
-    $.fn.extend({
-        treed: function (o) {
-
-            var openedClass = 'glyphicon-minus-sign';
-            var closedClass = 'glyphicon-plus-sign';
-
-            if (typeof o != 'undefined') {
-                if (typeof o.openedClass != 'undefined') {
-                    openedClass = o.openedClass;
-                }
-                if (typeof o.closedClass != 'undefined') {
-                    closedClass = o.closedClass;
-                }
-            }
-            ;
-
-//initialize each of the top levels
-    var tree = $(this);
-    tree.addClass("tree");
-    tree.find('li').has("ul").each(function () {
-        var branch = $(this); //li with children ul
-        branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
-        branch.addClass('branch');
-        branch.on('click', function (e) {
-            if (this == e.target) {
-                var icon = $(this).children('i:first');
-                icon.toggleClass(openedClass + " " + closedClass);
-                $(this).children().children().toggle();
-            }
-           // console.log("click++")
-        })
-        branch.children().children().toggle();
-    });
-//fire event from the dynamically added icon
-    tree.find('.branch .indicator').each(function () {
-        $(this).on('click', function () {
-            $(this).closest('li').click();
-          //  console.log("click++")
-        });
-    });
-//fire event to open branch if the li contains an anchor instead of text
-//    tree.find('.branch>a').each(function () {
-//        $(this).on('click', function (e) {
-//            $(this).closest('li').click();
-//            e.preventDefault();
-//           // console.log("click++")
-//        });
-//    });
-//fire event to open branch if the li contains a button instead of text
-    tree.find('.branch>button').each(function () {
-        $(this).on('click', function (e) {
-            $(this).closest('li').click();
-            e.preventDefault();
-           // console.log("click++")
-        });
-    });
-}
-});
-
-//Initialization of treeviews
-//var domtree="";
-var tmp2;
-$.getJSON("/wikiList",function(json){
-     //var domtree="<ul id=treeroot'>";
-   var domtree="<li>root\n";
-    domtree= buildTree(json);
-    domtree +="</li>";
-    tmp2=domtree;
-
-  //  console.log(convert(json));
-   // $("#tree1")[0].innerHTML=domtree;
-    var tmp= "<ul>root" +
-            "<li>dir1" +
-            "<ul><li>fil1</li>" +
-            "   <li>file2</li>" +
-            "   <li>dir2" +
-            "       <ul>" +
-            "           <li><a href='baidu.com'>file3</a></li>" +
-            "           <li>file4</li>" +
-            "       </ul>" +
-            "   </li>" +
-            "</ul>" +
-            "</li>";//domtree;//.append( domtree );
-
-
-
-
-            ;
-    $("#treeroot").append(domtree);
-    $('#treeroot').treed();
-
-    $("#treeroot a").each(function(){
-
-//        $(this)[0].oncontextmen=function(){
-//            return false;
-//        };
-        $(this).mousedown(function(e){
-            var key = e.which; // 鼠标键位（右键3，左键1，滚轮2）
-            if(key == 3){
-                var x = e.clientX;
-                var y = e.clientY;
-                $(".text").html("X: "+x+" Y: "+y);
-                $(".desk").show().css({left:x,top:y});
-            }
-
-        })
-
-    });
-});
-
-function buildTree(node,dir){
-    //domtree+="<li>root";
-    var domtree="";
-    dir=dir||"";
-    for(child in node){
-
-
-        if(child!="filename")
-        {
-            domtree+="<li>"+child;
-            domtree+=buildTree(node[child],dir+"/"+child);
-            domtree+="</li>\n";
-
-        }else{
-
-            domtree+="<ul>"
-            for(var i=0;i< node[child].length;i++)
-                domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
-
-        }
-    }
-    domtree+="</ul>\n";
-
-    return domtree||"";
-
-}
-function tt(){
-
-
-}
-$('#tree1').treed();
-
-$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
-
-$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
-
-
-</script>
