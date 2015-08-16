@@ -12,7 +12,7 @@ fs.readFile(path.join(__dirname, 'pad.html'),function(err,data){
 router.all("/*.*", function(request, response, next) {
 
   //  console.log(request.params[0]);
-    var filename=path.join(__dirname,'..',"public", request.params[0]+".html");
+    var filename=path.join(__dirname,'..',"doc", request.params[0]+".html");
     if( fs.existsSync(filename)){
 
         tmpcache= fs.readFileSync(path.join(__dirname, 'pad.html') );
@@ -60,7 +60,7 @@ router.use("/wikiSave", function(request, response, next) {
 
 router.use("/wikiAdd", function(request, response, next) {
 
-    var newfilename=path.join(__dirname,'..',"public",request.body.filename);
+    var newfilename=path.join(__dirname,'..',"doc",request.body.filename);
 
     mkdirsSync(request.body.filename,0777);
     if(!fs.existsSync(newfilename))
@@ -133,7 +133,7 @@ function readFile(path,filesList)
 
 function mkdirsSync(dirpath, mode) {
 
-    process.chdir(path.join(__dirname,"..","public"));
+    process.chdir(path.join(__dirname,"..","doc"));
     if (!fs.existsSync(dirpath)) {
         var pathtmp;
        // var count;
