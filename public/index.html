@@ -202,7 +202,7 @@
         // var filename = $('#WikiContent').data("file");
         $.ajax({
             url: '/wikiSave',
-            data:{ filename: currfile,  wikiContent: CK.getData()|| $("#wikiContent").html()},
+            data:{ filename: currfile,  wikiContent: CK?CK.getData():$("#wikiContent").html()},
             method:"POST",
             success:function (data) {
                 $.globalMessenger().post({
