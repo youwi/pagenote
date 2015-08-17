@@ -43,7 +43,7 @@ router.all("/*.*", function(request, response, next) {
 
 router.use("/wikiSave", function(request, response, next) {
 
-
+    if(request.body.filename )
     fs.writeFile(request.body.filename,request.body.wikiContent,function(err){
         if(err)
             console.log(err+request.body.filename,request.body.wikiContent);
