@@ -43,23 +43,28 @@ router.all("/*.*", function(request, response, next) {
 
 router.use("/wikiSave", function(request, response, next) {
 
-    if(request.body.filename )
-    fs.writeFile(request.body.filename,request.body.wikiContent,function(err){
-        if(err)
-            console.log(err+request.body.filename,request.body.wikiContent);
-        var exec = require('child_process').exec;
+    //if(request.body.filename )
+        var filename=path.join(__dirname,'..',"doc",request.body.filename);
+    fs.writeFile(filename,request.body.wikiContent,function(err){
+        if(err){
+            console.log(filename,request.body.wikiContent);
+            response.send(err.code);
+        }else{
+            var exec = require('child_process').exec;
             exec('git add * && git commit -m "ok" ',
                 function (error, stdout, stderr) {
                     if (error !== null) {
                         console.log('git error: ' + error);
                     }
                     console.log(' 成功加入git版本控制 ' );
-
-
                 });
+            response.send("ok");
+        }
+
+
 
     });
-    response.send("ok");
+
  //   next();
    // console.log(request.body.filename,request.body.wikiContent);
 
