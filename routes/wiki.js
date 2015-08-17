@@ -13,7 +13,12 @@ router.all("/*.*", function(request, response, next) {
 
   //  console.log(request.params[0]);
     var filename=path.join(__dirname,'..',"doc", request.params[0]+".html");
-    if( fs.existsSync(filename)){
+    if(request.query.edit!=null){
+
+
+    //if()
+
+    if( fs.existsSync(filename) && request.params[1]=="html"){
 
         tmpcache= fs.readFileSync(path.join(__dirname, 'pad.html') );
 
@@ -29,6 +34,9 @@ router.all("/*.*", function(request, response, next) {
         console.log(filename+"文件不存在");
         next();//存在就用原来的方式
     };
+    }else{
+        next();
+    }
 
 });
 

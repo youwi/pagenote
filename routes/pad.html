@@ -21,11 +21,11 @@
 	</div>
 	<!--<div class=' navbar-right'><small>@isyou</small></div>-->
     <div class='btn-group btn-groupfix'  id='tagedit'>
-        <span href="#" id='ckeditor' 	class="btn btn-primary  btn-xs">CKeditor</span>
+        <a href="#" id='ckeditor' 	class="btn btn-primary  btn-xs">CKeditor</a>
         <a href="#" id='save' 	class="btn btn-primary  btn-xs">保存</a>
         <a href="#" id='upload' class="btn btn-primary  btn-xs">上传文件</a>
         <a href="#" id='edit'   class="btn btn-primary  btn-xs">编辑</a>
-        <a href="#" class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#myModal">新建</a>
+        <a href="#" id='dom_new' class="btn btn-primary  btn-xs" data-toggle="modal" data-target="#myModal">新建</a>
         <a href="#" id='exit' 	class="btn btn-primary  btn-xs">退出</a>
         <!--<a href="#" id='tog'    class="btn btn-primary  btn-xs ">-->
             <!--&lt;!&ndash;<i class="fa-li fa fa-check-square"></i>a&ndash;&gt;-->
@@ -188,7 +188,6 @@
         {
             CK=CKEDITOR.replace('WikiContent');
             //CK.setData(window.frames.if.document.body.innerHTML) //设置内容
-
             CKEDITOR.on('instanceReady', function (e) {
                 //  var td = document.getElementById('cke_contents_' + e.editor.name), tbody = td.parentNode.parentNode;
                 // td.style.height = h - tbody.rows[0].offsetHeight - tbody.rows[2].offsetHeight + 'px';

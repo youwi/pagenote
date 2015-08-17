@@ -11,6 +11,7 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 <script src="js/messenger.min.js"></script>
 <script src="js/messenger-theme-flat.js"></script>
@@ -74,7 +75,7 @@
         <ul class="nav navfix  pull-right" id="menu-layoutit">
             <li>
                 <div class="btn-group" data-toggle="buttons-radio">
-                    <button type="button" id="edit" class="active btn btn-xs btn-primary">
+                    <button type="button" id="edit" class=" btn btn-xs btn-primary">
                         <!--<i class="glyphicon glyphicon-edit "></i>-->
                         编辑</button>
                     <button type="button" class="btn btn-xs btn-primary" id="save">
@@ -196,14 +197,12 @@
     });
     $("#tagtask").click(function () {
     });
-    $("#edit").click(function () {
-        window.frames.if.document.designMode = 'on';
-    });
+
     $("#save").click(save=function () {
         // var filename = $('#WikiContent').data("file");
         $.ajax({
-            url: '/caseSave',
-            data:{ filename: currfile,  wikiContent: ace_editor.getValue()},
+            url: '/wikiSave',
+            data:{ filename: currfile,  wikiContent: CK.getData()|| $("#wikiContent").html()},
             method:"POST",
             success:function (data) {
                 $.globalMessenger().post({
@@ -280,7 +279,28 @@
             }
         });
     });
+    var CK;
+    $("#edit").click(function(){
+        console.log("其实可以进入编辑态 document.designMode = 'on' 之后就可以粘贴doc;");
+        if(CK==null)
+        {
+            CK=CKEDITOR.replace('WikiContent');
+            //CK.setData(window.frames.if.document.body.innerHTML) //设置内容
 
+            CKEDITOR.on('instanceReady', function (e) {
+                //  var td = document.getElementById('cke_contents_' + e.editor.name), tbody = td.parentNode.parentNode;
+                // td.style.height = h - tbody.rows[0].offsetHeight - tbody.rows[2].offsetHeight + 'px';
+                //$('.cke_contents').css('height', "calc(100% - 210px)");
+                $('.cke_contents').css('height', "calc(100% - 120px)");
+                frames[0].addEventListener('paste',doparst);//设置可粘贴
+                //setTimeout("$('.cke_contents').css('height', $('body').height()-200);",100) ;//设置一个超时对象:自动变高
+            });
+        }else{
+            $("#WikiContent")[0].innerHTML=CK.getData();
+            CK.destroy();
+            CK=null;
+        }
+    });
     function refreshTree(){
         $('#treeroot').empty();
         $.getJSON("/wikiList?root="+$("myroot").val(),function(json){
@@ -294,13 +314,17 @@
 
 
             $("#treeroot a").click(function(){
-                currfile=$(this)[0].href;
+               // currfile=$(this)[0].href; //中文会转义
+                currfile=$(this).attr("href");
                 $("#d_filename").text(currfile);
                 $.ajax({
                     url: currfile,
                     method:"GET",
                     success:suc=function(data){
-                        $("#WikiBody").html(data);
+                        $("#WikiContent").html(data);
+                        if(CK)   CK.destroy();
+                        CK=null;
+                      //  $("#cke_WikiContent").remove();
                     },
                     error:function(err){
                         //如果是js文件加载执行以后
@@ -323,11 +347,8 @@
                 //    //$.globalMessenger().post(data);
                 //});
 
-
-
-
                 return false;
-            })
+            });
             //
 //        $("#treeroot a").each(function(){
 //
@@ -390,7 +411,38 @@
 
     }
 
+    function doparst(e){
 
+        var reader = new FileReader();
+        var tout;
+
+        if(e.clipboardData.types.indexOf('Files') > -1)
+        {
+            console.log("data:" + e.clipboardData);
+            console.log("types:"+ e.clipboardData.types);
+            console.log("getData:"+ e.clipboardData.getData("img/*"));
+            //console.log("files[0]:"+ e.clipboardData.files[0]);
+            console.log("items[0]:"+ e.clipboardData.items[0]);
+
+            var it=e.clipboardData.items[0];
+            //	console.log("items[0].getData():"+ it.getData());
+            reader.readAsDataURL( it.getAsFile());
+            console.log("tout:",tout);
+            console.log("reader",reader);
+            console.log("text:"+reader.result.toString());//为结果文件
+            xio=reader; //注意读取有时间限制!! 要使用onload来读取结果
+            e.clipboardData.setData("text/plain", '<img src="' + reader.result +'" >');
+            console.log(e.srcElement);
+            reader.onload=function(ev){
+                console.log("<img src=\"" + reader.result+"\" >");
+                $(e.srcElement).append(  "<img src=\"" + reader.result+"\" >" )  ;
+            };
+            e.preventDefault();
+            console.log(e);
+            //  	'<img src="' + reader.result +'" >';//生成图片,然后把图片加入就好了.
+        }
+
+    };
     document.onkeydown = function (event) {
         var e = event || window.event;
         var keyCode = e.keyCode || e.which;
@@ -485,7 +537,7 @@
     }
     </style>
 
-<div id="WikiBody">
+<div id="WikiContent">
 
 </div>
 
