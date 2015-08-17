@@ -86,12 +86,12 @@
                         新建</button>
                 <!--</div>-->
                 <!--<div class="btn-group">-->
-                    <button type="button" class="btn btn-xs btn-primary" id="runcurr" data-target="#downloadModal" href="template/download.html" role="button" data-toggle="modal">
-                        <!--<i class="glyphicon-chevron-down glyphicon"></i>-->
-                        运行</button>
-                    <button class="btn btn-xs btn-primary" id="button-share-modal" href="template/saveLayout.html" role="button" data-toggle="modal" data-target="#shareModal">
-                        <!--<i class="glyphicon-share glyphicon"></i>-->
-                        保存</button>
+                    <!--<button type="button" class="btn btn-xs btn-primary" id="runcurr" data-target="#downloadModal" href="template/download.html" role="button" data-toggle="modal">-->
+                        <!--&lt;!&ndash;<i class="glyphicon-chevron-down glyphicon"></i>&ndash;&gt;-->
+                        <!--运行</button>-->
+                    <!--<button class="btn btn-xs btn-primary" id="button-share-modal" href="template/saveLayout.html" role="button" data-toggle="modal" data-target="#shareModal">-->
+                        <!--&lt;!&ndash;<i class="glyphicon-share glyphicon"></i>&ndash;&gt;-->
+                        <!--保存</button>-->
                     <button class="btn btn-xs btn-primary" href="#clear" id="clear"><i class="glyphicon-trash glyphicon"></i> 删除</button>
 
                 </div>
@@ -229,10 +229,15 @@
         upac();
     });
     $("#newfile").click(function(){
-        $.post('/caseAdd', {
+        $.post('/wikiAdd', {
             filename:thfilename.value,
         },function(data){
-            $.globalMessenger().post(data);
+            $.globalMessenger().post({
+                message: data,
+                hideAfter:1,
+                type: 'error',
+                showCloseButton: true
+            });
             $("#myModal").hide();
             refreshTree();
             //window.location.href = "/"+thfilename.value

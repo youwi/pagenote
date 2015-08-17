@@ -168,13 +168,14 @@
     });
     $("#save").click(function(){
         var filename=$('#WikiContent').data("file");
+        //  window.location.pathname
         //var path=$("#if")[0].dataset.path;
         //window.frames.if.document.designMode='off';
         $.post('/wikiSave', {
            // wikipath:path,
-            filename:filename,
-            wikiContent:$("#WikiContent")[0].innerHTML
-        },function(data){ alert(data);});
+            filename:window.location.pathname,
+            wikiContent:CK?CK.getData():$("#WikiContent")[0].innerHTML
+        },function(data){ alert(filename+":"+data);});
     });
     $("#upload").click(function(){
         //alert("#upload");
