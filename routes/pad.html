@@ -173,7 +173,7 @@
         //window.frames.if.document.designMode='off';
         $.post('/wikiSave', {
            // wikipath:path,
-            filename:window.location.pathname,
+            filename:decodeURI(window.location.pathname),
             wikiContent:CK?CK.getData():$("#WikiContent")[0].innerHTML
         },function(data){ alert(filename+":"+data);});
     });
