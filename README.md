@@ -7,8 +7,8 @@
  * 支持粘贴doc (暂不支持图文混合)
  
 #安装
-安装node,安装express,jade
-git clone 我的项目
-cd pagenote
-node bin/www
-(如果提示依赖请按提示操作就行了)
+ * 安装node,安装express,jade (如果提示依赖请按提示操作就行了)
+ * git clone https://github.com/youwi/pagenote.git
+ * cd pagenote
+ * node bin/www
+
