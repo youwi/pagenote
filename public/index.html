@@ -53,7 +53,7 @@
             <span class="glyphicon-bar"></span>
             <span class="glyphicon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">主页<span class="label label-default">.....</span></a>
+        <a class="navbar-brand" href="#">主页<!--<span class="label label-default">.....</span>--></a>
     </div>
     <div class="collapse navbar-collapse navfix">
 
@@ -74,7 +74,7 @@
         <label id="d_filename" class="nav "></label>
         <ul class="nav navfix  pull-right" id="menu-layoutit">
             <li>
-                <div class="btn-group" data-toggle="buttons-radio">
+                <div class="btn-group patch-blc" data-toggle="buttons-radio">
                     <button type="button" id="edit" class=" btn btn-xs btn-primary">
                         <!--<i class="glyphicon glyphicon-edit "></i>-->
                         编辑</button>
@@ -356,6 +356,8 @@
                         console.log("出错");
                     }
                 });
+
+
                 //
                 //$.get(currfile, function (data) {
                 //
@@ -366,6 +368,30 @@
                 //});
 
                 return false;
+            });
+
+            $(".branch span").click(function() {
+                //$(this).prev().toggleClass("glyphicon-minus-sign" + " " + "glyphicon-plus-sign");
+                $(this).parent().children().children().toggle();
+                currfile = $(this).attr("data-link");
+                $("#d_filename").text(currfile);
+                $.ajax({
+                    url: currfile,
+                    method: "GET",
+                    success: suc = function (data) {
+                        $("#WikiContent").html(data);
+                        if (CK)   CK.destroy();
+                        CK = null;
+                    },
+                    error: function (err) {
+
+                        if (err.status == 200) {
+                            suc(err.responseText)
+
+                        }
+                        console.log("出错");
+                    }
+                });
             });
             //
 //        $("#treeroot a").each(function(){
@@ -407,20 +433,15 @@
         var domtree="";
         dir=dir||"";
         for(child in node){
-
-
             if(child!="filename")
             {
-                domtree+="<li>"+child;
+                domtree+="<li>"+"<span data-link='"+dir+"/"+child+"/index.html'>"+child+"</span>";
                 domtree+=buildTree(node[child],dir+"/"+child);
                 domtree+="</li>\n";
-
             }else{
-
                 domtree+="<ul>"
                 for(var i=0;i< node[child].length;i++)
                     domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
-
             }
         }
         domtree+="</ul>\n";
@@ -532,7 +553,7 @@
         left:0
     }
     .tree ul li:last-child:before {
-        background:#CCC;
+        background:#FFF;
         height:auto;
         top:1em;
         bottom:0
@@ -564,6 +585,29 @@
 
 <style>
 
+    .tree li a:hover{
+        background: #000;
+        box-shadow: 1px 1px 5px 5px rgb(73, 73, 239);
+        //-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));
+        color:#FFF;
+    }
+    .branch span:hover{
+        cursor:pointer;
+        background: #000;
+        box-shadow: 1px 1px 5px 5px rgb(73, 73, 239);
+    //-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));
+        color:#FFF;
+    }
+    .patch-blc button{
+        background-color: #222222 !important;
+        border-color: #222222!important;
+        height: 22px;
+    }
+
+    #d_copp{
+        background: #222222;
+        color: white;
+    }
     body{
         line-height: 1
     }
@@ -633,7 +677,7 @@
         left: 0px;
         bottom: 0;
         top: 24px;
-        background: #ccc;
+        background: #FFF;
         /* padding: 10px 15px;*/
         z-index: 10;
         -webkit-transition: all 500ms ease;
@@ -771,7 +815,7 @@
         left:0
     }
     .tree ul li:last-child:before {
-        background:#CCC;
+        background:#FFF;
         height:auto;
         top:1em;
         bottom:0
