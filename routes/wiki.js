@@ -45,7 +45,7 @@ router.use("/wikiSave", function(request, response, next) {
 
     //if(request.body.filename )
         var filename=path.join(__dirname,'..',"doc",request.body.filename);
-    fs.writeFile(filename,request.body.wikiContent,function(err){
+        fs.writeFile(filename,request.body.wikiContent,function(err){
         if(err){
             console.log(filename,request.body.wikiContent);
             response.send(err.code);
