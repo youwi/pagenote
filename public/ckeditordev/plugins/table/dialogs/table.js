@@ -385,7 +385,8 @@
 								validate: CKEDITOR.dialog.validate.cssLength( editor.lang.common.invalidCssLength.replace( '%1', editor.lang.common.width ) ),
 								onChange: function() {
 									var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
-									styles && styles.updateStyle( 'width', this.getValue() );
+									styles && styles.updateStyle( 'width', this.getValue() )
+									&& styles.updateStyle( 'border-collapse', "collapse" );
 								},
 								setup: function( selectedTable ) {
 									var val = selectedTable.getStyle( 'width' );
@@ -468,15 +469,13 @@
 								controlStyle: 'width:6em',
 								label: "border-collapse",
 								'default': "collapse",
-						 
-								setup: function( selectedTable ) {
-									this.setValue( selectedTable.getAttribute( 'border-collapse' ) || '' );
+
+								onChange: function( selectedTable ) {
+									selectedTable.setStyle('border-collapse', this.getValue() );
+									//styles && styles.updateStyle( 'border-collapse', this.getValue() );
 								},
-								commit: function( data, selectedTable ) {
-									if ( this.getValue() )
-										selectedTable.setAttribute( 'border-collapse', this.getValue() );
-									else
-										selectedTable.removeAttribute( 'border-collapse' );
+								commit:  function( data, selectedTable ) {
+									selectedTable.setStyle('border-collapse', this.getValue() );
 								}
 							}
 						]
