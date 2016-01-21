@@ -1197,7 +1197,8 @@
 			// any insertion is pointless (#10339).
 			if ( data && processDataForInsertion( that, data ) ) {
 				// DATA INSERTION
-				insertDataIntoRange( that );
+				insertDataIntoRange( that );//过滤了!!!!!!
+				//insertDataIntoRange( data );//过滤了!!!!!!
 			}
 
 			// FINAL CLEANUP

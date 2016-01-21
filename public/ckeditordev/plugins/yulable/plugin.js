@@ -2,14 +2,13 @@
     //Section 1 : 按下自定义按钮时执行的代码
     var cmd = {
             exec: function (editor) {
-                editor.insertHtml( '<span style=" ' +
+                var ss='<span style="' +
                     'padding: 0px 10px;' +
-                  //  'display: inline;       ' +
-                   // 'float: left;' +
-                   // 'font-size: 12px;  ' +
-                    'color: rgb(255, 255, 255);' +
-                    'border-radius: 10px;' +
-                    'background-color: rgb(78, 200, 59); ">' + editor.getSelection().getSelectedText() + '</span>' );
+
+                    'border-radius:10px;' +
+                    'background-color:rgb(78, 200, 59); ' +
+                    ' color: rgb(255, 255, 255); ">' + editor.getSelection().getSelectedText() + '</span>';
+                editor.insertHtml(ss ,"html" );
                 console.log("plgggg");
 
             }
