@@ -44,8 +44,9 @@ CKEDITOR.editorConfig = function( config ) {
    config.enterMode = CKEDITOR.ENTER_BR;
     //  config.startupMode ='source';
 
-   config.extraPlugins = 'yulable';
+   config.extraPlugins = 'yulable,lineheight';
   //  config.toolbar.append("yulable");
+
 
 };
 

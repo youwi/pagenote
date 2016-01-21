@@ -311,7 +311,7 @@
                 $('.cke_contents').css('height', "calc(100% - 120px)");
 
 
-                frames[0].addEventListener('paste',doparst);//设置可粘贴
+             //   frames[0].addEventListener('paste',doparst);//设置可粘贴
                 //setTimeout("$('.cke_contents').css('height', $('body').height()-200);",100) ;//设置一个超时对象:自动变高
             });
         }else{
@@ -585,6 +585,34 @@
 
 
 <style>
+    .cke_button__green_label{
+        display: inline;
+        padding: 0px 10px;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        background-color: rgb(78, 200, 59);
+    }
+    .cke_button__green_icon{
+        display: none;
+        padding: 0px 10px;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        background-color: rgb(78, 200, 59);
+    }
+    .cke_button__blue_label{
+        display: inline;
+        padding: 0px 10px;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        background-color: rgb(115, 51, 241);
+    }
+    .cke_button__blue_icon {
+        display: none;
+        padding: 0px 10px;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        background-color: rgb(115, 51, 241);
+    }
 
     .tree li a:hover{
         background: #000;
