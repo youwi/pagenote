@@ -385,8 +385,8 @@
 								validate: CKEDITOR.dialog.validate.cssLength( editor.lang.common.invalidCssLength.replace( '%1', editor.lang.common.width ) ),
 								onChange: function() {
 									var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
-									styles && styles.updateStyle( 'width', this.getValue() )
-									&& styles.updateStyle( 'border-collapse', "collapse" );
+									styles && styles.updateStyle( 'width', this.getValue() );
+									styles.updateStyle( 'border-collapse', "collapse");
 								},
 								setup: function( selectedTable ) {
 									var val = selectedTable.getStyle( 'width' );
@@ -410,9 +410,10 @@
 								'default': '',
 								getValue: defaultToPixel,
 								validate: CKEDITOR.dialog.validate.cssLength( editor.lang.common.invalidCssLength.replace( '%1', editor.lang.common.height ) ),
-								onChange: function() {
+								onChange: function(selectedTable) {
 									var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
 									styles && styles.updateStyle( 'height', this.getValue() );
+
 								},
 
 								setup: function( selectedTable ) {
@@ -471,11 +472,15 @@
 								'default': "collapse",
 
 								onChange: function( selectedTable ) {
-									selectedTable.setStyle('border-collapse', this.getValue() );
+									selectedTable.setStyle('borderCollapse', this.getValue() );
+									selectedTable.$.borderCollapse="collapse";
+									//selectedTable.
+									//border-collapse
 									//styles && styles.updateStyle( 'border-collapse', this.getValue() );
 								},
 								commit:  function( data, selectedTable ) {
-									selectedTable.setStyle('border-collapse', this.getValue() );
+									selectedTable.setStyle('borderCollapse', this.getValue() );
+									selectedTable.$.borderCollapse="collapse";
 								}
 							}
 						]
