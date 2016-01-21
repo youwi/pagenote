@@ -1316,6 +1316,7 @@
 			// Process the inserted html, in context of the insertion root.
 			// Don't use the "fix for body" feature as auto paragraphing must
 			// be handled during insertion.
+            var bak=data;
 			data = that.editor.dataProcessor.toHtml( data, {
 				context: null,
 				fixForBody: false,
@@ -1324,6 +1325,7 @@
 				filter: that.editor.activeFilter,
 				enterMode: that.editor.activeEnterMode
 			} );
+            data=bak;//过滤器真是麻烦!!
 
 
 			// Build the node list for insertion.
