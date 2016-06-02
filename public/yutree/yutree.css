@@ -1,16 +1,16 @@
-.tree, .tree ul {
+.yutree, .yutree ul {
     margin:0;
     padding:0;
     list-style:none
 }
-.tree ul {
+.yutree ul {
     margin-left:1em;
     position:relative
 }
-.tree ul ul {
+.yutree ul ul {
     margin-left:.5em
 }
-.tree ul:before {
+.yutree ul:before {
     content:"";
     display:block;
     width:0;
@@ -20,7 +20,7 @@
     left:0;
     border-left:1px solid
 }
-.tree li {
+.yutree li {
     margin:0;
     padding:0 1em;
     /*line-height:2em;*/
@@ -28,7 +28,7 @@
     font-weight:700;
     position:relative
 }
-.tree ul li:before {
+.yutree ul li:before {
     content:"";
     display:block;
     width:10px;
@@ -39,7 +39,7 @@
     top:1em;
     left:0
 }
-.tree ul li:last-child:before {
+.yutree ul li:last-child:before {
     background:#FFF;
     height:auto;
     top:1em;
@@ -48,13 +48,13 @@
 .indicator {
     margin-right:5px;
 }
-.tree li a {
+.yutree li a {
     text-decoration: none;
     color:#369;
     white-space: nowrap;
     overflow: hidden;
 }
-.tree li button, .tree li button:active, .tree li button:focus {
+.yutree li button, .yutree li button:active, .yutree li button:focus {
     text-decoration: none;
     color:#369;
     border:none;
@@ -64,19 +64,19 @@
     outline: 0;
 }
 
-.tree, .tree ul {
+.yutree, .yutree ul {
     margin:0;
     padding:0;
     list-style:none
 }
-.tree ul {
+.yutree ul {
     margin-left:1em;
     position:relative
 }
-.tree ul ul {
+.yutree ul ul {
     margin-left:.5em
 }
-.tree ul:before {
+.yutree ul:before {
     content:"";
     display:block;
     width:0;
@@ -86,7 +86,7 @@
     left:0;
     border-left:1px solid
 }
-.tree li {
+.yutree li {
     margin:0;
     padding:0 1em;
     /*line-height:2em;*/
@@ -94,7 +94,7 @@
     font-weight:700;
     position:relative
 }
-.tree ul li:before {
+.yutree ul li:before {
     content:"";
     display:block;
     width:10px;
@@ -105,7 +105,7 @@
     top:1em;
     left:0
 }
-.tree ul li:last-child:before {
+.yutree ul li:last-child:before {
     background:#FFF;
     height:auto;
     top:1em;
@@ -114,11 +114,11 @@
 .indicator {
     margin-right:5px;
 }
-.tree li a {
+.yutree li a {
     text-decoration: none;
     color:#369;
 }
-.tree li button, .tree li button:active, .tree li button:focus {
+.yutree li button, .yutree li button:active, .yutree li button:focus {
     text-decoration: none;
     color:#369;
     border:none;
