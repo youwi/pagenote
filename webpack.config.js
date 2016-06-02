@@ -27,7 +27,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.jsx?$/,
-        loader: 'jshint-loader',
+        loader: 'eslint-loader',
         include: APP_PATH
       }
     ],
@@ -45,6 +45,10 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         loader: 'url'
+      },
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
       }
     ]
   },

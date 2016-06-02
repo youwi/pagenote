@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "webpack-dev-server --hot --inline --colors --profile --progress"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -13,5 +14,53 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "classnames":"^2.2.4",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-eslint": "~6.0.4",
+    "bootstrap": "^4.0.0-alpha.2",
+    "css-loader": "^0.23.1",
+    "expect": "^1.16.0",
+    "file-loader": "^0.8.5",
+    "flux": "^2.1.1",
+    "html-webpack-plugin": "^2.15.0",
+    "jsdom": "^8.3.0",
+    "jshint": "^2.9.1",
+    "eslint":"^2.8.0",
+    "eslint-loader":"^1.3.0",
+    "eslint-plugin-babel": "~3.1.0",
+    "eslint-plugin-react": "~4.2.3",
+    "jshint-loader": "^0.8.3",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.2",
+    "keymirror": "^0.1.1",
+    "mocha": "^2.4.5",
+    "moment": "^2.12.0",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^3.4.2",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.7",
+    "react-addons-test-utils": "^0.14.8",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.1",
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.4",
+    "redbox-react": "^1.2.2",
+    "redux": "^3.3.1",
+    "redux-devtools": "^3.2.0",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "underscore": "^1.8.3",
+    "url-loader": "^0.5.7"
+
   }
+
 }
