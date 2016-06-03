@@ -20,7 +20,12 @@
     left:0;
     border-left:1px solid
 }
+.yutree .branch{
+   // float: left
+    //display: flex
+}
 .yutree li {
+
     margin:0;
     padding:0 1em;
     /*line-height:2em;*/
@@ -126,4 +131,15 @@
     margin:0px 0px 0px 0px;
     padding:0px 0px 0px 0px;
     outline: 0;
+}
+
+.yutree li a:hover{
+    background: #000;
+    box-shadow: 1px 1px 5px 5px rgb(73, 73, 239);
+//-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));
+    color:#FFF;
+}
+
+.yutree ul li:before {
+    margin-top: -6px;
 }

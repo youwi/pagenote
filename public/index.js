@@ -116,7 +116,7 @@ $("#edit").click(function(){
 
         CKEDITOR.on('instanceReady', function (e) {
 
-            $('.cke_contents').css('height', "calc(100% - 120px)");
+            $('.cke_contents').css('height', "calc(100% - 145px)");
 
 
             //frames[0].addEventListener('paste',doparst);//设置可粘贴
@@ -155,8 +155,31 @@ function refreshTree(){
             });
             return false;
         },
-        rclick:function () {
+        dclick:function () {
+            $(this).prev().toggleClass("glyphicon-minus-sign" + " " + "glyphicon-plus-sign");
+            $(this).parent().children().children().toggle();
+            currfile = $(this).attr("data-link");
+            $("#d_filename").text(currfile);
+            $.ajax({
+                url: currfile,
+                method: "GET",
+                success: suc = function (data) {
+                    $("#WikiContent").html(data);
+                    if (CK)   CK.destroy();
+                    CK = null;
+                },
+                error: function (err) {
 
+                    if (err.status == 200) {
+                        suc(err.responseText)
+
+                    }
+                    console.log("出错");
+                }
+            });
+        },
+        rclcik:function () {
+            
         }
 
     });
@@ -180,6 +203,18 @@ document.onkeydown = function (event) {
 
 $(document).ready( function () {
     refreshTree();
+    $(".sidebar-nav").mCustomScrollbar({
+        autoHideScrollbar:true,
+        autoExpandScrollbar:true,
+        mouseWheel:{enable:true},
+        axis:"yx" // vertical and horizontal scrollbar
+    });
+    $("body").mCustomScrollbar({
+        autoHideScrollbar:true,
+      //  autoExpandScrollbar:true,
+        mouseWheel:{enable:true},
+        axis:"y" // vertical and horizontal scrollbar
+    });
 
 });
 $._messengerDefaults = {

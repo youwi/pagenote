@@ -27,12 +27,7 @@
     background-color: rgb(115, 51, 241);
 }
 
-.tree li a:hover{
-    background: #000;
-    box-shadow: 1px 1px 5px 5px rgb(73, 73, 239);
-//-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));
-    color:#FFF;
-}
+
 .branch span:hover{
     cursor:pointer;
     background: #000;
@@ -47,14 +42,21 @@
 }
 
 #d_copp{
-    background: #222222;
-    color: white;
+    //background: #222222;
+   // color: white;
+
+}
+#d_copp:before {
+    margin-top: 5px;
+    content: "\e082";
+    color: black;
+    margin-left: 10px
 }
 body{
     line-height: 1
 }
 
-.jsoneditor div.tree button {
+.jsoneditor div.yutree button {
     height: 18px;
 
 }
@@ -63,9 +65,6 @@ body{
     color: #0f0f0f;
 }
 
-.tree ul li:before {
-    margin-top: -6px;
-}
 
 pre {
     margin-bottom: 0px;
@@ -184,7 +183,7 @@ body {
     /*
     修正导航条和35像素和 滚动条
     */
-    height: calc(100% - 24px);
+   // height: calc(100% - 24px);
     padding-top: 26px;
     padding-bottom: 1px;
     margin-left: 200px;
@@ -214,10 +213,12 @@ body {
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-
+#treeroot{
+    width: 400px;
+}
 
 .sidebar-nav{
     height:calc(100% - 24px);
-    overflow-y:scroll;
+ //   overflow-y:scroll;
     border:1px solid;
 }

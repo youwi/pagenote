@@ -17,6 +17,7 @@ function buildElement(node,dir){
     //domtree+="<li>root";
     var domtree="";
     dir=dir||"";
+    domtree+="<ul>";
     for(child in node){
         if(child!="filename")
         {
@@ -24,7 +25,7 @@ function buildElement(node,dir){
             domtree+=buildElement(node[child],dir+"/"+child);
             domtree+="</li>\n";
         }else{
-            domtree+="<ul>"
+
             for(var i=0;i< node[child].length;i++)
                 domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
         }
@@ -35,37 +36,22 @@ function buildElement(node,dir){
 
 }
 
-$(".branch span").click(function() {
-    //$(this).prev().toggleClass("glyphicon-minus-sign" + " " + "glyphicon-plus-sign");
-    $(this).parent().children().children().toggle();
-    currfile = $(this).attr("data-link");
-    $("#d_filename").text(currfile);
-    $.ajax({
-        url: currfile,
-        method: "GET",
-        success: suc = function (data) {
-            $("#WikiContent").html(data);
-            if (CK)   CK.destroy();
-            CK = null;
-        },
-        error: function (err) {
 
-            if (err.status == 200) {
-                suc(err.responseText)
-
-            }
-            console.log("出错");
-        }
-    });
-});
 
 $.fn.extend({
     yutree: function (o) {
-
-
-        $.getJSON(o.url,)
-
-
+        var root=$(this);
+        jQuery.ajax({
+            type: 'get',
+            url: o.url,
+            data: undefined,
+            success: function (json) {
+                root.append(buildElement(json));
+               // o.click();
+            },
+            dataType: "json",
+            async:false
+        });
 
 
 
@@ -85,7 +71,7 @@ $.fn.extend({
 
 //initialize each of the top levels
         var tree = $(this);
-        tree.addClass("tree");
+        tree.addClass("yutree");
         tree.find('li').has("ul").each(function () {
             var branch = $(this); //li with children ul
             branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
@@ -115,5 +101,8 @@ $.fn.extend({
                 // console.log("click++")
             });
         });
+
+        $(".yutree a").click(o.click);
+        $(".yutree .branch span").click(o.dclick);
     }
 });

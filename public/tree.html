@@ -331,6 +331,7 @@ function buildTree(node,dir){
     //domtree+="<li>root";
     var domtree="";
     dir=dir||"";
+    domtree+="<ul>"
     for(child in node){
 
 
@@ -342,7 +343,7 @@ function buildTree(node,dir){
 
         }else{
 
-            domtree+="<ul>"
+
             for(var i=0;i< node[child].length;i++)
                 domtree+="\t\t<li><a href='"+dir+"/"+node[child][i]+"'>"+node[child][i]+"</a></li>\n";
 
