@@ -1,6 +1,10 @@
 # pagenote
 -  基于node+express开发
 - 用来代替wiki的个人文档系统
+- 安装说明:
+
+        npm install express
+        node server.js
  
 #特点
  * 支持粘贴截图,
@@ -11,7 +15,7 @@
  * 安装node,安装express,jade (如果提示依赖请按提示操作就行了)
  * git clone https://github.com/youwi/pagenote.git
  * cd pagenote
- * node bin/www
+ * node bin/server.js
  
 # 文件说明
 - public 前端html加js
