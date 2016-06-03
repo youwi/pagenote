@@ -2,26 +2,29 @@
 
 
 
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
 var fs=require("fs");
+var logger = require('morgan');
 var path = require('path');
 var express = require('express');
 var methodOverride = require('method-override');
 var app = express();
-var router = express.Router();
+
+var bodyParser = require('body-parser');
 
 ////////////////////////////////////////////////////////////////////////
 app.set('port', process.env.PORT || 8008);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
+app.use(logger("dev"));
 app.use(methodOverride());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'www')));
+
 app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
+app.use("/",bodyParser.urlencoded({limit: '50mb', extended: false }));
+app.use(bodyParser.raw());
+
 app.use(express.static(path.join(__dirname, 'doc')));
-app.use('/', router);
+app.use(express.static(path.join(__dirname, 'www')));
 
 
 app.listen(app.get('port'), function(){
@@ -29,7 +32,7 @@ app.listen(app.get('port'), function(){
 });
 
 ////////////////////////////////////////////////////////////////////////
-router.all("/*.*", function(request, response, next) {
+app.all("/*.*", function(request, response, next) {
     var tmpcache=fs.readFileSync(path.join(__dirname, 'www/pad.html'));
   //  console.log(request.params[0]);
   var filename=path.join(__dirname,"doc", request.params[0]+".html");
@@ -53,7 +56,7 @@ router.all("/*.*", function(request, response, next) {
   }
 });
 
-router.use("/wikiSave", function(request, response, next) {
+app.use("/wikiSave", function(request, response, next) {
 
   //if(request.body.filename )
   var filename=path.join(__dirname,"doc",request.body.filename);
@@ -82,7 +85,7 @@ router.use("/wikiSave", function(request, response, next) {
 
 });
 
-router.use("/wikiAdd", function(request, response, next) {
+app.use("/wikiAdd", function(request, response, next) {
 
   var newfilename=path.join(__dirname,"doc",request.body.filename);
 
@@ -105,7 +108,7 @@ router.use("/wikiAdd", function(request, response, next) {
   response.end();
 });
 
-router.use("/wikiList", function(request, response, next) {
+app.use("/wikiList", function(request, response, next) {
 
   var filetree=new Object();
 
