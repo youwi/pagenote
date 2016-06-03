@@ -63,6 +63,13 @@ $("#newfile").click(function(){
         $('#myModal').modal('toggle');
         refreshTree();
         //window.location.href = "/"+thfilename.value
+    }).error(function (data) {
+        $.globalMessenger().post({
+            message: JSON.parse(data.responseText).message,
+            hideAfter:5,
+            type: 'error',
+            showCloseButton: true
+        });
     });
 });
 $("#runcurr").click(function () {

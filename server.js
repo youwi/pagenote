@@ -12,37 +12,23 @@ var methodOverride = require('method-override');
 var app = express();
 var router = express.Router();
 
+////////////////////////////////////////////////////////////////////////
 app.set('port', process.env.PORT || 8008);
-app.set('view engine', 'jade');
 
 app.use(methodOverride());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'wwww')));
+app.use(express.static(path.join(__dirname, 'www')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'doc')));
 app.use('/', router);
 
 
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
 app.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-
+////////////////////////////////////////////////////////////////////////
 router.all("/*.*", function(request, response, next) {
     var tmpcache=fs.readFileSync(path.join(__dirname, 'www/pad.html'));
   //  console.log(request.params[0]);
@@ -66,7 +52,6 @@ router.all("/*.*", function(request, response, next) {
     next();
   }
 });
-
 
 router.use("/wikiSave", function(request, response, next) {
 
@@ -97,7 +82,6 @@ router.use("/wikiSave", function(request, response, next) {
 
 });
 
-
 router.use("/wikiAdd", function(request, response, next) {
 
   var newfilename=path.join(__dirname,"doc",request.body.filename);
@@ -121,7 +105,6 @@ router.use("/wikiAdd", function(request, response, next) {
   response.end();
 });
 
-
 router.use("/wikiList", function(request, response, next) {
 
   var filetree=new Object();
@@ -132,12 +115,29 @@ router.use("/wikiList", function(request, response, next) {
 
 
 });
+
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.write(JSON.stringify({
+        message: err.message
+    }));
+    res.end();
+});
+
+
+
+////////////////////////////////////////////////////////////////////////
 function geFileList(path){
   var filesList =new Object();
   readFile(path,filesList);
   return filesList;
 }
-
 //遍历读取文件
 function readFile(path,filesList){
   files = fs.readdirSync(path);//需要用到同步读取
@@ -196,4 +196,4 @@ function mkdirsSync(dirpath, mode) {
   }
   return true;
 }
-console.log("Sd");
+
