@@ -125,7 +125,7 @@ $("#edit").click(function(){
 
             $('.cke_contents').css('height', "calc(100% - 145px)");
 
-
+            $(".cke_wysiwyg_frame")[0].contentWindow.onkeydown=window.document.onkeydown;
             //frames[0].addEventListener('paste',doparst);//设置可粘贴
             //setTimeout("$('.cke_contents').css('height', $('body').height()-200);",100) ;//设置一个超时对象:自动变高
         });
