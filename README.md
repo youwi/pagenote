@@ -5,6 +5,9 @@
 
         npm install express
         node server.js
+# 目标 
+做成协作文档平台,要超级轻量级,保存为文件,而且支持上传文件.
+https://linux.cn/article-6982-1.html
  
 #特点
  * 支持粘贴截图,
